@@ -1,0 +1,24 @@
+# Who wants to fish a million cats
+### EliteSoba
+
+A simple adaptation of https://catfishing.net that pulls the most common user answers
+and presents them in multiple choice format. In the event of a question not having enough
+common user answers, it just skips that question for now.
+
+Uses data from days 32 to 594.
+
+Uses a hacked together combination of webpack, React, Typescript, an Tailwind
+
+#### TODO:
+- Add image attributions and whatnot
+- Determine better behavior for a question not having enough responses
+- Filter very similar wrong answers somehow
+- More variety in correct answers
+- Link to article when there's no image
+- Actual end screen
+- Day picker
+- Mixing random days
+- Better way of harvesting and managing day data
+- Actually cleaning up this mess
+- I really want to use react router here with urls and whatnot
+- I also kinda wanna practice react native
