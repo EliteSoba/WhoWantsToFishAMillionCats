@@ -4,6 +4,7 @@ import React, { useEffect, useState } from 'react';
 
 import { GameDay, QuestionData, QuestionDataWithAnswer, WikiData } from '../types/types';
 import Question from './Question.tsx';
+import CatfishingData from '../data/catfishing.json';
 
 const wikiTemplate = 'https://en.wikipedia.org/w/api.php?action=query&origin=*&format=json&formatversion=2&redirects=1&prop=extracts%7Cpageimages&exchars=500&exintro=1&explaintext=1&piprop=name%7Cthumbnail&pithumbsize=300&pilicense=free&exlimit=10&pilimit=10&titles=';
 const wikiImageTemplate = 'https://en.wikipedia.org/w/api.php?action=query&origin=*&format=json&formatversion=2&prop=imageinfo&iiprop=extmetadata%7Curl&iiextmetadatafilter=Artist%7CLicenseShortName%7CLicenseUrl&titles=';
@@ -22,7 +23,9 @@ const Game:React.FC<Props> = ({ replay }) => {
 
   useEffect(() => {
     (async () => {
-      const data = await import('../data/catfishing.json') as any;
+      // TODO: both of these approaches kinda suck
+      // const data = await import('../data/catfishing.json') as any;
+      const data: any = CatfishingData;
 
       const allDays = Object.keys(data);
       let chosenDay = allDays[Math.floor(Math.random() * allDays.length)];
@@ -34,9 +37,15 @@ const Game:React.FC<Props> = ({ replay }) => {
 
       const dayData = data[chosenDay] as GameDay;
 
+      // TODO: what to do if dayData is undefined
+
       const gameData = dayData.articles.map((article, i) => {
         const popular = dayData.stats.articles[i].popular;
-        const correctAnswer = popular.find(data => data[1] === 1);
+
+        // Pick a random passing answer from all the popular answers that were accepted
+        const correctAnswers = popular.filter(data => data[1] === 1);
+        const correctAnswer = correctAnswers[Math.floor(Math.random() * correctAnswers.length)];
+
         const incorrectGuesses = popular.filter(data => data[1] === 0);
         if (correctAnswer && incorrectGuesses.length >= 3) {
           return {
@@ -52,6 +61,8 @@ const Game:React.FC<Props> = ({ replay }) => {
       if (gameData.length === 0) {
         throw Error('Picked a day with no articles');
       }
+
+      // TODO: this can take a while. Loading screen?
       const wikiQuery = gameData.map(({ title }) => title).join('|');
       const wikiData = await fetch(`${wikiTemplate}${wikiQuery}`);
       const parsedData = await wikiData.json() as WikiData;
@@ -108,7 +119,6 @@ const Game:React.FC<Props> = ({ replay }) => {
 
   const answerQuestion = (wasCorrect: boolean) => {
     if (wasCorrect) {
-      console.log('correct');
       setScore(prevScore => prevScore + 1);
     }
     incrementIndex();
