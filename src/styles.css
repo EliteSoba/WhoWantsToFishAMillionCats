@@ -1,0 +1,96 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@font-face {
+  font-display: swap;
+  font-family: Alegreya;
+  font-style: normal;
+  font-weight: 400 900;
+  src: url(./fonts/alegreya-v38-latin-variable.woff2) format("woff2")
+}
+
+@font-face {
+  font-display: swap;
+  font-family: Alegreya;
+  font-style: italic;
+  font-weight: 400 900;
+  src: url(./fonts/alegreya-italic-v38-latin-variable.woff2) format("woff2")
+}
+
+@font-face {
+  font-display: swap;
+  font-family: Alegreya Sans;
+  font-style: normal;
+  font-weight: 500;
+  src: url(./fonts/alegreya-sans-v25-latin-500.woff2) format("woff2")
+}
+
+@font-face {
+  font-display: swap;
+  font-family: Alegreya Sans;
+  font-style: italic;
+  font-weight: 500;
+  src: url(./fonts/alegreya-sans-v25-latin-500italic.woff2) format("woff2")
+}
+
+@font-face {
+  font-display: swap;
+  font-family: Alegreya Sans;
+  font-style: normal;
+  font-weight: 700;
+  src: url(./fonts/alegreya-sans-v25-latin-700.woff2) format("woff2")
+}
+
+@layer base {
+  html {
+    font-family: Alegreya,ui-serif,Georgia,Cambria,Times New Roman,Times,serif;
+  }
+
+  .bg-catfish {
+    background-image: url(./assets/catfish.png);
+  }
+
+
+  button.large {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    --tw-bg-opacity: 1;
+    background-color: rgb(6 78 59 / var(--tw-bg-opacity, 1));
+    font-family: Alegreya Sans, ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", Segoe UI Symbol, "Noto Color Emoji";
+    font-size: 1.875rem;
+    line-height: 1;
+    font-weight: 700;
+    letter-spacing: .025em;
+    --tw-text-opacity: 1;
+    color: rgb(209 250 229 / var(--tw-text-opacity, 1));
+    text-decoration-line: none
+  }
+
+  button.large:hover:enabled {
+    --tw-bg-opacity: 1;
+    background-color: rgb(6 95 70 / var(--tw-bg-opacity, 1));
+    --tw-text-opacity: 1;
+    color: rgb(255 255 255 / var(--tw-text-opacity, 1)) }
+
+  h3 {
+    font-family: Alegreya Sans,ui-sans-serif,system-ui,sans-serif,"Apple Color Emoji","Segoe UI Emoji",Segoe UI Symbol,"Noto Color Emoji";
+  }
+
+  .categories > span:not(:last-child)::after {
+    padding-left: .125rem;
+    padding-right: .125rem;
+    vertical-align: middle;
+    font-size: .5em;
+    --tw-text-opacity: 1;
+    color: rgb(251 191 36 / var(--tw-text-opacity, 1));
+    --tw-content: " ✦ ";
+    content: var(--tw-content);
+  }
+
+  .default-padding {
+    padding-left: 2rem;
+    padding-right: 2rem;
+  }
+}
