@@ -1,4 +1,5 @@
 import React, { MouseEventHandler } from 'react';
+import StyledLink from './StyledLink.tsx';
 
 interface Props {
   callback: MouseEventHandler<HTMLButtonElement>
@@ -28,7 +29,8 @@ const StartScreen: React.FC<Props> = ({ callback }) => {
               </svg>
             </div>
             <div className='text-base/normal italic sm:text-xl/tight'>
-              Data stolen from <a className='underline decoration-1 underline-offset-4 not-italic text-amber-400' href='https://catfishing.net/' target='_blank'>catfishing</a>.
+              {'Data stolen from '}
+              <StyledLink href='https://catfishing.net/'>catfishing</StyledLink>.
             </div>
           </div>
         </div>

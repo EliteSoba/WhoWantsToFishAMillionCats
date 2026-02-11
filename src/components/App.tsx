@@ -35,7 +35,7 @@ const App: React.FC = () => {
     <section className='h-screen flex flex-col'>
       <header className="relative">
         <a
-          href="./index.html"
+          href="./"
           className="pl-4 sm:pl-8 -translate-y-0.5 leading-none text-amber-400 hover:underline hover:decoration-1 hover:underline-offset-4"
         >
           <span className="xs:text-4xl text-3xl font-normal tracking-normal md:text-5xl">Who wants to </span>

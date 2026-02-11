@@ -26,7 +26,10 @@ const Game:React.FC<Props> = ({ replay }) => {
 
       const allDays = Object.keys(data);
       let chosenDay = allDays[Math.floor(Math.random() * allDays.length)];
-      // chosenDay = "343";
+      const paramDay = new URLSearchParams(window.location.search).get('day');
+      if (paramDay) {
+        chosenDay = paramDay;
+      }
       setChosenDay(chosenDay);
 
       const dayData = data[chosenDay] as GameDay;
