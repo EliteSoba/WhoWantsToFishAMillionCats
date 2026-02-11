@@ -7,7 +7,7 @@ common user answers, it just skips that question for now.
 
 Uses data from days 32 to 594.
 
-Uses a hacked together combination of webpack, React, Typescript, an Tailwind
+Uses a hacked together combination of webpack, React, Typescript, and Tailwind
 
 #### TODO:
 - Add image attributions and whatnot
@@ -21,6 +21,8 @@ Uses a hacked together combination of webpack, React, Typescript, an Tailwind
 - Mixing random days
 - Better way of harvesting and managing day data
 - Actually cleaning up this mess
+- I should do something about all the SVGs
+- Keyboard controls, or remove the tooltips
 - ~~Figure out how my tailwind setup is working~~
 - I really want to use react router here with urls and whatnot
 - I also kinda wanna practice react native
