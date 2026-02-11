@@ -21,6 +21,6 @@ Uses a hacked together combination of webpack, React, Typescript, an Tailwind
 - Mixing random days
 - Better way of harvesting and managing day data
 - Actually cleaning up this mess
-- Figure out how my tailwind setup is working
+- ~~Figure out how my tailwind setup is working~~
 - I really want to use react router here with urls and whatnot
 - I also kinda wanna practice react native

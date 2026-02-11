@@ -85,7 +85,7 @@ const AnswerScreen: React.FC<Props> = ({ guess, questionData }) => {
     const splitCategories = interleave(categories, ' · ');
     return (
       <>
-        <section className="from-emerald-darkest/80 bg-gradient-to-b to-transparent pt-4 text-base sm:text-lg">
+        <section className="from-emerald-darkest/80 bg-linear-to-b to-transparent pt-4 text-base sm:text-lg">
           {renderMainSummary()}
         </section>
         <section className="grid grid-cols-[auto_1fr] items-center gap-x-1.5 gap-y-2 pt-4 text-emerald-500">

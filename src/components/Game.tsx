@@ -5,6 +5,7 @@ import React, { useEffect, useState } from 'react';
 import { GameDay, QuestionData, QuestionDataWithAnswer, WikiData } from '../types/types';
 import Question from './Question.tsx';
 import CatfishingData from '../data/catfishing.json';
+import EndScreen from './EndScreen.tsx';
 
 const wikiTemplate = 'https://en.wikipedia.org/w/api.php?action=query&origin=*&format=json&formatversion=2&redirects=1&prop=extracts%7Cpageimages&exchars=500&exintro=1&explaintext=1&piprop=name%7Cthumbnail&pithumbsize=300&pilicense=free&exlimit=10&pilimit=10&titles=';
 const wikiImageTemplate = 'https://en.wikipedia.org/w/api.php?action=query&origin=*&format=json&formatversion=2&prop=imageinfo&iiprop=extmetadata%7Curl&iiextmetadatafilter=Artist%7CLicenseShortName%7CLicenseUrl&titles=';
@@ -63,7 +64,9 @@ const Game:React.FC<Props> = ({ replay }) => {
       }
 
       // TODO: this can take a while. Loading screen?
-      const wikiQuery = gameData.map(({ title }) => title).join('|');
+      // TODO: Manually replacing '&' chars, but idk what other problematic chars there are
+      const wikiQuery = gameData.map(({ title }) => encodeURI(title).replaceAll('&', '%26')).join('|');
+      console.log(wikiQuery);
       const wikiData = await fetch(`${wikiTemplate}${wikiQuery}`);
       const parsedData = await wikiData.json() as WikiData;
       // Note: this is necessary for attributions
@@ -73,6 +76,7 @@ const Game:React.FC<Props> = ({ replay }) => {
       // const wikiImageData = await fetch(`${wikiImageQuery}${wikiImageQuery}`);
       // const parsedImages =
       console.log(parsedData);
+      console.log(gameData);
 
       const gameDataWithAnswer = gameData.map(questionData => {
         const wikiData = parsedData.query.pages.find(({ title }) => title === questionData.title);
@@ -94,15 +98,16 @@ const Game:React.FC<Props> = ({ replay }) => {
     setIndex(i => i + 1);
   }
 
-
   if (gameData === null) {
     return null;
   }
 
   if (index >= gameData.length) {
     // TODO: game ended screen
+    console.log(index, gameData.length);
     return (
       <>
+        <EndScreen score={score} day={chosenDay} />
         <div className='font-sans text-sm/none font-bold text-emerald-600'>
           game over
         </div>

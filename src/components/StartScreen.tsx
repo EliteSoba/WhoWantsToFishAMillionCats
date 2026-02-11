@@ -9,7 +9,7 @@ const StartScreen: React.FC<Props> = ({ callback }) => {
 
   const getPlayButton = () => {
     return (
-      <button type="button" className="h-full large w-full px-4 [&>svg]:sm:!mr-4 " title="Play today [keyboard: Enter]" onClick={callback}>
+      <button type="button" className="h-full large w-full px-4 [&>svg]:sm:mr-4!" title="Play today [keyboard: Enter]" onClick={callback}>
         <svg xmlns="http://www.w3.org/2000/svg" width="3rem" height="3rem" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true" className="inline">
           <path fill="currentColor" fillRule="evenodd" d="M4.25 19a.75.75 0 0 1 .75-.75h14a.75.75 0 0 1 0 1.5H5a.75.75 0 0 1-.75-.75m3 3a.75.75 0 0 1 .75-.75h8a.75.75 0 0 1 0 1.5H8a.75.75 0 0 1-.75-.75M12 1.25a.75.75 0 0 1 .75.75v1a.75.75 0 0 1-1.5 0V2a.75.75 0 0 1 .75-.75M4.399 4.399a.75.75 0 0 1 1.06 0l.393.392a.75.75 0 0 1-1.06 1.061l-.393-.393a.75.75 0 0 1 0-1.06m15.202 0a.75.75 0 0 1 0 1.06l-.393.393a.75.75 0 0 1-1.06-1.06l.393-.393a.75.75 0 0 1 1.06 0M1.25 12a.75.75 0 0 1 .75-.75h1a.75.75 0 0 1 0 1.5H2a.75.75 0 0 1-.75-.75m19 0a.75.75 0 0 1 .75-.75h1a.75.75 0 0 1 0 1.5h-1a.75.75 0 0 1-.75-.75" clipRule="evenodd"></path><path fill="currentColor" d="M5.25 12c0 1.178.302 2.286.833 3.25H2a.75.75 0 0 0 0 1.5h9.25v-4.94l-.72.72a.75.75 0 1 1-1.06-1.06l2-2a.75.75 0 0 1 1.06 0l2 2a.75.75 0 1 1-1.06 1.06l-.72-.72v4.94H22a.75.75 0 0 0 0-1.5h-4.083A6.75 6.75 0 1 0 5.25 12"></path>
         </svg>
@@ -38,10 +38,10 @@ const StartScreen: React.FC<Props> = ({ callback }) => {
         <ul className="list-disc marker:text-emerald-600 xs:text-xl/relaxed mt-2 space-y-2 text-lg/relaxed sm:text-2xl/relaxed text-amber-100">
           <li><span className="font-medium text-emerald-400">Guess the Wikipedia article from its categories.</span></li>
           <li>Every day there are <span className="font-medium text-emerald-400">10 notable, diverse, and interesting people, places, and things</span> to guess.</li>
-          <li><span className="font-medium text-emerald-400">It’s a challenging test of general knowledge,</span> and a source of new Wikipedia discoveries!</li>
+          <li><span className="font-medium text-emerald-400">It's a challenging test of general knowledge,</span> and a source of new Wikipedia discoveries!</li>
         </ul>
       </div>
-      <div className="border-y border-emerald-700 h-[5rem] justify-center bg-emerald-900 text-emerald-100 text-3xl">
+      <div className="border-y border-emerald-700 h-20 justify-center bg-emerald-900 text-emerald-100 text-3xl">
         {getPlayButton()}
       </div>
     </>

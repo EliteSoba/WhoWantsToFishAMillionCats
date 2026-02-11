@@ -44,7 +44,7 @@ const App: React.FC = () => {
           <span className="xs:text-2xl font-sans text-xl font-bold uppercase md:text-[2.1rem]">Cats?</span>
         </a>
         <div
-          className="bg-catfish absolute top-0 right-0 left-0 -z-10 h-[260px] bg-[size:80%] bg-[right_-1px_top_0px] bg-no-repeat sm:bg-[size:65%]">
+          className="bg-catfish absolute top-0 right-0 left-0 -z-10 h-65 bg-size-[80%] bg-position-[right_-1px_top_0px] bg-no-repeat sm:bg-size-[65%]">
         </div>
       </header>
       {content}
