@@ -19,6 +19,9 @@ export default {
       ]
     })
   ],
+  resolve: {
+    extensions: ['.ts', '.tsx', '.js', '.json']
+  },
   module: {
     rules: [
       {

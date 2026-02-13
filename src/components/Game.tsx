@@ -3,9 +3,9 @@ import React, { useEffect, useState } from 'react';
 // import data from '../data/catfishing.json';
 
 import { GameDay, QuestionData, QuestionDataWithAnswer, WikiData } from '../types/types';
-import Question from './Question.tsx';
+import Question from './Question';
 import CatfishingData from '../data/catfishing.json';
-import EndScreen from './EndScreen.tsx';
+import EndScreen from './EndScreen';
 
 const wikiTemplate = 'https://en.wikipedia.org/w/api.php?action=query&origin=*&format=json&formatversion=2&redirects=1&prop=extracts%7Cpageimages&exchars=500&exintro=1&explaintext=1&piprop=name%7Cthumbnail&pithumbsize=300&pilicense=free&exlimit=10&pilimit=10&titles=';
 const wikiImageTemplate = 'https://en.wikipedia.org/w/api.php?action=query&origin=*&format=json&formatversion=2&prop=imageinfo&iiprop=extmetadata%7Curl&iiextmetadatafilter=Artist%7CLicenseShortName%7CLicenseUrl&titles=';
@@ -14,8 +14,8 @@ interface Props {
   replay: () => void
 };
 
-const Game:React.FC<Props> = ({ replay }) => {
-  const [gameData, setGameData]= useState<QuestionDataWithAnswer[] | null>(null);
+const Game: React.FC<Props> = ({ replay }) => {
+  const [gameData, setGameData] = useState<QuestionDataWithAnswer[] | null>(null);
   const [index, setIndex] = useState<number>(0);
   const [score, setScore] = useState<number>(0);
 
@@ -66,7 +66,6 @@ const Game:React.FC<Props> = ({ replay }) => {
       // TODO: this can take a while. Loading screen?
       // TODO: Manually replacing '&' chars, but idk what other problematic chars there are
       const wikiQuery = gameData.map(({ title }) => encodeURI(title).replaceAll('&', '%26')).join('|');
-      console.log(wikiQuery);
       const wikiData = await fetch(`${wikiTemplate}${wikiQuery}`);
       const parsedData = await wikiData.json() as WikiData;
       // Note: this is necessary for attributions
@@ -75,8 +74,6 @@ const Game:React.FC<Props> = ({ replay }) => {
       //   .join('|');
       // const wikiImageData = await fetch(`${wikiImageQuery}${wikiImageQuery}`);
       // const parsedImages =
-      console.log(parsedData);
-      console.log(gameData);
 
       const gameDataWithAnswer = gameData.map(questionData => {
         const wikiData = parsedData.query.pages.find(({ title }) => title === questionData.title);
@@ -102,21 +99,16 @@ const Game:React.FC<Props> = ({ replay }) => {
     return null;
   }
 
-  if (index >= gameData.length) {
+  if (index + 8 >= gameData.length) {
     // TODO: game ended screen
-    console.log(index, gameData.length);
     return (
       <>
         <EndScreen score={score} day={chosenDay} />
-        <div className='font-sans text-sm/none font-bold text-emerald-600'>
-          game over
-        </div>
-        <div className='font-sans text-sm/none font-bold text-emerald-600'>score: {score} / {gameData.length}</div>
         <button
           onClick={() => replay()}
-          className='bg-emerald-900 enabled:hover:bg-emerald-700 p-4 rounded-md border-emerald-700 border font-sans text-sm/none font-bold text-emerald-600'
+          className='bg-emerald-900 enabled:hover:bg-emerald-700 p-4 rounded-md border-emerald-700 border font-sans text-sm/none font-bold text-emerald-600 w-fit'
         >
-          play again?
+          Play Again?
         </button>
       </>
     );

@@ -1,7 +1,7 @@
 import React, { ReactNode, useState } from 'react';
 
-import StartScreen from './StartScreen.tsx';
-import Game from './Game.tsx';
+import StartScreen from './StartScreen';
+import Game from './Game';
 
 type StateTypes = {
   [key: string]: number,
@@ -23,12 +23,20 @@ const App: React.FC = () => {
     incrementRound();
   }
 
+  const restartCallback = () => {
+    try {
+      window.history.replaceState({}, '', '/');
+    } finally {
+      startCallback();
+    }
+  }
+
   let content : ReactNode;
   if (currentView === States.START) {
     content = <StartScreen callback={startCallback}/>;
   }
   else {
-    content = <Game key={round} replay={startCallback} />;
+    content = <Game key={round} replay={restartCallback} />;
   }
 
   return (

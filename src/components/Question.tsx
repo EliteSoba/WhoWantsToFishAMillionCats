@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 
 import { Popular, QuestionDataWithAnswer } from '../types/types';
-import AnswerScreen from './AnswerScreen.tsx';
-import { dayToDate } from '../util/DayUtils.ts';
+import AnswerScreen from './AnswerScreen';
+import { dayToDate } from '../util/DayUtils';
 
 interface Props {
   questionData: QuestionDataWithAnswer,
@@ -107,7 +107,7 @@ const Question: React.FC<Props> = ({
             {'Q '}
             <data className="text-emerald-200">{curArticle + 1}</data>
             {` · ${articleCount}`}
-            </div>
+          </div>
           <div className="bg-[#043d2f] flex h-6 items-center px-3 text-emerald-300 sm:h-7">
             {`${day} · ${date}`}
           </div>

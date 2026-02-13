@@ -1,5 +1,5 @@
 import React, { MouseEventHandler } from 'react';
-import StyledLink from './StyledLink.tsx';
+import StyledLink from './StyledLink';
 
 interface Props {
   callback: MouseEventHandler<HTMLButtonElement>
