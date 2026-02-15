@@ -43,6 +43,8 @@
 @theme {
   --font-sans: Alegreya Sans, ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", Segoe UI Symbol, "Noto Color Emoji";
   --color-emerald-darkest: oklch(0.22 0.04 169.37);
+  --color-emerald-925: oklch(0.32 0.06 170.95);
+  --color-emerald-935: oklch(0.29 0.05 171.78);
 }
 
 @layer base {
@@ -125,5 +127,19 @@
     font-weight: 700;
     font-size: 1.5rem;
     line-height: 1;
+  }
+
+  .badge-emerald {
+    --tw-bg-opacity: 1;
+    background-color: rgb(52 211 153 / var(--tw-bg-opacity, 1));
+    --tw-text-opacity: 1;
+    color: rgb(6 78 59 / var(--tw-text-opacity, 1));
+  }
+
+  .badge-red {
+    --tw-bg-opacity: 1;
+    background-color: rgb(252 165 165 / var(--tw-bg-opacity, 1));
+    --tw-text-opacity: 1;
+    color: rgb(153 27 27 / var(--tw-text-opacity, 1));
   }
 }

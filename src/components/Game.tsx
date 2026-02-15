@@ -1,10 +1,7 @@
 import React, { useEffect, useState } from 'react';
 
-// import data from '../data/catfishing.json';
-
-import { GameDay, QuestionData, QuestionDataWithAnswer, WikiData } from '../types/types';
+import { GameDay, Popular, QuestionData, QuestionDataWithAnswer, WikiData } from '../types/types';
 import Question from './Question';
-import CatfishingData from '../data/catfishing.json';
 import EndScreen from './EndScreen';
 
 const wikiTemplate = 'https://en.wikipedia.org/w/api.php?action=query&origin=*&format=json&formatversion=2&redirects=1&prop=extracts%7Cpageimages&exchars=500&exintro=1&explaintext=1&piprop=name%7Cthumbnail&pithumbsize=300&pilicense=free&exlimit=10&pilimit=10&titles=';
@@ -18,25 +15,26 @@ const Game: React.FC<Props> = ({ replay }) => {
   const [gameData, setGameData] = useState<QuestionDataWithAnswer[] | null>(null);
   const [index, setIndex] = useState<number>(0);
   const [score, setScore] = useState<number>(0);
+  const [guesses, setGuesses] = useState<Popular[]>([]);
 
   // no clue why this needs a default value
   const [chosenDay, setChosenDay] = useState<string>('0');
 
   useEffect(() => {
     (async () => {
-      // TODO: both of these approaches kinda suck
-      // const data = await import('../data/catfishing.json') as any;
-      const data: any = CatfishingData;
+      // Surely there's a cleaner implementation
+      const MIN_DAY = 32;
+      const FIRST_DAY: any = new Date('2024-06-24');
+      let MAX_DAY = Math.floor((new Date() as any - FIRST_DAY) / (24 * 3_600_000));
 
-      const allDays = Object.keys(data);
-      let chosenDay = allDays[Math.floor(Math.random() * allDays.length)];
+      let chosenDay = `${Math.floor(Math.random() * (MAX_DAY - MIN_DAY) + MIN_DAY)}`;
       const paramDay = new URLSearchParams(window.location.search).get('day');
       if (paramDay) {
         chosenDay = paramDay;
       }
       setChosenDay(chosenDay);
 
-      const dayData = data[chosenDay] as GameDay;
+      const dayData = await (await fetch(`./data/${chosenDay}.json`)).json() as GameDay;
 
       // TODO: what to do if dayData is undefined
 
@@ -53,7 +51,9 @@ const Game: React.FC<Props> = ({ replay }) => {
             title: article.title,
             categories: article.categories,
             correctAnswer: correctAnswer,
-            wrongAnswers: incorrectGuesses.slice(0, 3)
+            wrongAnswers: incorrectGuesses.slice(0, 3),
+            correctRate: dayData.stats.articles[i].correctRate,
+            closeRate: dayData.stats.articles[i].closeRate,
           } as QuestionData;
         }
         return null;
@@ -99,11 +99,11 @@ const Game: React.FC<Props> = ({ replay }) => {
     return null;
   }
 
-  if (index + 8 >= gameData.length) {
+  if (index + 7 >= gameData.length) {
     // TODO: game ended screen
     return (
       <>
-        <EndScreen score={score} day={chosenDay} />
+        <EndScreen score={score} day={chosenDay} guesses={guesses} allQuestionData={gameData} />
         <button
           onClick={() => replay()}
           className='bg-emerald-900 enabled:hover:bg-emerald-700 p-4 rounded-md border-emerald-700 border font-sans text-sm/none font-bold text-emerald-600 w-fit'
@@ -114,8 +114,9 @@ const Game: React.FC<Props> = ({ replay }) => {
     );
   }
 
-  const answerQuestion = (wasCorrect: boolean) => {
-    if (wasCorrect) {
+  const answerQuestion = (guess: Popular) => {
+    setGuesses(prevGuesses => [...prevGuesses, guess]);
+    if (guess[1] === 1) {
       setScore(prevScore => prevScore + 1);
     }
     incrementIndex();
@@ -125,7 +126,7 @@ const Game: React.FC<Props> = ({ replay }) => {
     <Question
       key={index}
       questionData={gameData[index]}
-      callback={wasCorrect => answerQuestion(wasCorrect)}
+      callback={guess => answerQuestion(guess)}
       day={chosenDay}
       score={score}
       articleCount={gameData.length}

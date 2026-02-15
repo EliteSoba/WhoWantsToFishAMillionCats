@@ -1,27 +1,3 @@
-export type Correctness = 0 | 1;
-
-export interface GameDay {
-  "articles": Article[],
-  "stats": {
-    "articles": {
-      "popular": Popular[]
-    }[]
-  }
-};
-
-export interface Article {
-  "title": string,
-  "categories": string[],
-  "names": string[]
-};
-
-export interface QuestionData {
-  "title": string,
-  "categories": string[],
-  "correctAnswer": Popular,
-  "wrongAnswers": Popular[]
-};
-
 export interface Thumbnail {
   "source": string,
   "width": number,
@@ -38,9 +14,37 @@ export interface WikiData {
   }
 };
 
+export type Correctness = 0 | 1;
+
+export type Popular = [name: string, Correctness, number, number];
+
+export interface Article {
+  "title": string,
+  "categories": string[],
+  "names": string[]
+};
+
+export interface GameDay {
+  "articles": Article[],
+  "stats": {
+    "articles": {
+      "correctRate": number,
+      "closeRate": number,
+      "popular": Popular[]
+    }[]
+  }
+};
+
+export interface QuestionData {
+  "title": string,
+  "categories": string[],
+  "correctAnswer": Popular,
+  "wrongAnswers": Popular[],
+  "correctRate": number,
+  "closeRate": number
+};
+
 export interface QuestionDataWithAnswer extends QuestionData {
   "summary": string,
   "imageData"?: Thumbnail
 };
-
-export type Popular = [string, Correctness, number, number];

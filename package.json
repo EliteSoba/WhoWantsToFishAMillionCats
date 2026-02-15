@@ -4,8 +4,9 @@
   "description": "Multiple Choice Catfishing Implementation",
   "private": true,
   "scripts": {
+    "fetchData": "node ./getCatfishingData.js",
     "build": "webpack",
-    "build-prod": "webpack --mode production",
+    "build-prod": "node ./getCatfishingData.js && webpack --mode production",
     "predeploy": "npm run build-prod",
     "deploy": "gh-pages -d dist"
   },

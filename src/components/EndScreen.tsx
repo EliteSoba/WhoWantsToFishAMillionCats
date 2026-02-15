@@ -1,19 +1,20 @@
 import React from 'react';
 import { dayToDate } from '../util/DayUtils';
 import GuessSummary from './GuessSummary';
+import { Popular, QuestionDataWithAnswer } from '../types/types';
 
 interface Props {
   score: number,
-  day: string
+  day: string,
+  guesses: Popular[],
+  allQuestionData: QuestionDataWithAnswer[],
 };
 
-const RENDER_CORRECTNESS = false;
-
-const EndScreen: React.FC<Props> = ({ score, day }) => {
+const EndScreen: React.FC<Props> = ({ score, day, guesses, allQuestionData }) => {
   const renderHeader = () => {
     return (
       <section className="default-padding grid select-none grid-cols-[1fr_auto] items-center gap-x-4 bg-emerald-300/20 py-2 sm:py-4">
-        <div className="text-lg/normal sm:text-2xl/normal">You scored <span className="badge-large inline-flex w-7 h-7 justify-center">{score}</span></div>
+        <div className="text-lg/normal sm:text-2xl/normal">You scored <span className={`badge-large inline-flex w-7 h-7 justify-center ${score ? 'badge-emerald' : 'badge-red'}`}>{score}</span></div>
         <div className="text-right font-sans text-xs/tight font-bold uppercase tracking-wider text-amber-100 sm:text-base/tight">
           Day {day}
           <br />
@@ -41,10 +42,10 @@ const EndScreen: React.FC<Props> = ({ score, day }) => {
           <div className="pb-8">
             <div className="flex items-end justify-between pb-2">
               <h3 className="mb-0!">Questions</h3>
-              {RENDER_CORRECTNESS ?? renderCorrectness()}
+              {renderCorrectness()}
             </div>
             <div className="divide-y divide-dotted divide-emerald-900">
-              <GuessSummary />
+              {guesses.map((guess, i) => <GuessSummary guess={guess} questionData={allQuestionData[i]} />)}
             </div>
           </div>
         </div>

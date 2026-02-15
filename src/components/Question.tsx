@@ -6,7 +6,7 @@ import { dayToDate } from '../util/DayUtils';
 
 interface Props {
   questionData: QuestionDataWithAnswer,
-  callback: (wasCorrect: boolean) => void,
+  callback: (guess: Popular) => void,
   day: string,
   score: number,
 
@@ -87,7 +87,7 @@ const Question: React.FC<Props> = ({
 
   const renderNextButton = () => {
     return (
-      <button type="button" title="Next [keyboard: Enter]" className="large w-full px-4 h-20" onClick={() => callback(guess[1] === 1)}>
+      <button type="button" title="Next [keyboard: Enter]" className="large w-full px-4 h-20" onClick={() => callback(guess)}>
         <svg xmlns="http://www.w3.org/2000/svg" width="3rem" height="3rem" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true" className='m-2'>
           <path fill="currentColor" fillRule="evenodd" d="M12 22c5.523 0 10-4.477 10-10S17.523 2 12 2 2 6.477 2 12s4.477 10 10 10m.47-13.53a.75.75 0 0 1 1.06 0l3 3a.75.75 0 0 1 0 1.06l-3 3a.75.75 0 1 1-1.06-1.06l1.72-1.72H8a.75.75 0 0 1 0-1.5h6.19l-1.72-1.72a.75.75 0 0 1 0-1.06" clipRule="evenodd"></path>
         </svg>
