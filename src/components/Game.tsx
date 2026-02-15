@@ -105,12 +105,14 @@ const Game: React.FC<Props> = ({ replay }) => {
     return (
       <>
         <EndScreen score={score} day={chosenDay} guesses={guesses} allQuestionData={gameData} />
-        <button
-          onClick={() => replay()}
-          className='bg-emerald-900 enabled:hover:bg-emerald-700 p-4 rounded-md border-emerald-700 border font-sans text-sm/none font-bold text-emerald-600 w-fit'
-        >
-          Play Again?
-        </button>
+        <div className='default-padding'>
+          <button
+            onClick={() => replay()}
+            className='bg-emerald-900 enabled:hover:bg-emerald-700 p-4 rounded-md border-emerald-700 border font-sans text-sm/none font-bold text-emerald-600 w-fit'
+          >
+            Play Again?
+          </button>
+        </div>
       </>
     );
   }

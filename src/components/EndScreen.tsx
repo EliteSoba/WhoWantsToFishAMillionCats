@@ -45,7 +45,8 @@ const EndScreen: React.FC<Props> = ({ score, day, guesses, allQuestionData }) =>
               {renderCorrectness()}
             </div>
             <div className="divide-y divide-dotted divide-emerald-900">
-              {guesses.map((guess, i) => <GuessSummary guess={guess} questionData={allQuestionData[i]} />)}
+              {guesses.map((guess, i) => <GuessSummary key={i} guess={guess} questionData={allQuestionData[i]} />)}
+              <div key='dumb-empty-div-just-to-force-the-bottom-divider-border' />
             </div>
           </div>
         </div>

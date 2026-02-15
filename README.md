@@ -10,7 +10,7 @@ Uses data from days 32 to 594.
 Uses a hacked together combination of webpack, React, Typescript, and Tailwind
 
 #### TODO:
-- Add image attributions and whatnot
+- Add attributions
 - Determine better behavior for a question not having enough responses
 - Filter very similar wrong answers somehow, and more variety
 - ~~More variety in correct answers~~
