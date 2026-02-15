@@ -41,7 +41,8 @@ export interface QuestionData {
   "correctAnswer": Popular,
   "wrongAnswers": Popular[],
   "correctRate": number,
-  "closeRate": number
+  "closeRate": number,
+  "allAnswers": Popular[]
 };
 
 export interface QuestionDataWithAnswer extends QuestionData {

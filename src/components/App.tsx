@@ -44,7 +44,7 @@ const App: React.FC = () => {
       <header className="relative">
         <a
           href="./"
-          className="pl-4 sm:pl-8 -translate-y-0.5 leading-none text-amber-400 hover:underline hover:decoration-1 hover:underline-offset-4"
+          className="pl-4 sm:pl-8 -translate-y-0.5 leading-none text-amber-400 underlined-text"
         >
           <span className="xs:text-4xl text-3xl font-normal tracking-normal md:text-5xl">Who wants to </span>
           <span className="xs:text-4xl text-3xl font-normal tracking-normal italic md:text-5xl">fish</span>

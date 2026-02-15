@@ -47,9 +47,37 @@
   --color-emerald-935: oklch(0.29 0.05 171.78);
 }
 
+@layer components {
+  .underlined-text {
+    @apply decoration-1 underline-offset-4;
+
+    @variant hover {
+      @apply underline;
+    }
+  }
+
+  .end-title {
+    @apply underline decoration-1 underline-offset-4;
+
+    @variant group-[.correct] {
+      text-decoration-color: #336857;
+      @variant group-hover {
+        text-decoration-color: var(--color-emerald-300);
+      }
+    }
+    @variant group-[.incorrect] {
+      text-decoration-color: #494f48;
+      @variant group-hover {
+        text-decoration-color: var(--color-red-300);
+      }
+    }
+  }
+}
+
 @layer base {
   html {
     font-family: Alegreya,ui-serif,Georgia,Cambria,Times New Roman,Times,serif;
+    @apply tracking-wide;
   }
 
   h1,h2,h3,h4 {
@@ -141,5 +169,21 @@
     background-color: rgb(252 165 165 / var(--tw-bg-opacity, 1));
     --tw-text-opacity: 1;
     color: rgb(153 27 27 / var(--tw-text-opacity, 1));
+  }
+
+  .pill {
+    /* TODO */
+    margin-right: .25rem;
+    margin-bottom: .125rem;
+    overflow: visible;
+    display: block;
+    -webkit-box-orient: horizontal;
+    line-clamp: none;
+    display: inline-block;
+    white-space: nowrap;
+    border-radius: .5rem;
+    --tw-bg-opacity: 1;
+    @apply bg-emerald-darkest;
+    padding: .25rem .375rem;
   }
 }

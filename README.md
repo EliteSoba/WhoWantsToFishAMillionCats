@@ -19,8 +19,10 @@ Uses a hacked together combination of webpack, React, Typescript, and Tailwind
 - Actual end screen
 - Day picker
 - Mixing random days
-- Better way of harvesting and managing day data
+- ~~Better way of harvesting and managing day data~~
+  - The day separation is great but makes mixing of data more difficult
 - Actually cleaning up this mess
+  - css :(
 - I should do something about all the SVGs
 - Keyboard controls, or remove the tooltips
 - ~~Figure out how my tailwind setup is working~~

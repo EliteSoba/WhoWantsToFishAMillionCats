@@ -54,6 +54,7 @@ const Game: React.FC<Props> = ({ replay }) => {
             wrongAnswers: incorrectGuesses.slice(0, 3),
             correctRate: dayData.stats.articles[i].correctRate,
             closeRate: dayData.stats.articles[i].closeRate,
+            allAnswers: popular,
           } as QuestionData;
         }
         return null;
@@ -99,7 +100,7 @@ const Game: React.FC<Props> = ({ replay }) => {
     return null;
   }
 
-  if (index + 7 >= gameData.length) {
+  if (index >= gameData.length) {
     // TODO: game ended screen
     return (
       <>
