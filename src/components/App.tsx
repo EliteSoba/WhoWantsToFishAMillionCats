@@ -25,7 +25,7 @@ const App: React.FC = () => {
 
   const restartCallback = () => {
     try {
-      window.history.replaceState({}, '', '/');
+      window.history.replaceState({}, '', document.location.href.replace(document.location.search, ''));
     } finally {
       startCallback();
     }
