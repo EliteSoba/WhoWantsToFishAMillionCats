@@ -38,8 +38,7 @@ export interface GameDay {
 export interface QuestionData {
   "title": string,
   "categories": string[],
-  "correctAnswer": Popular,
-  "wrongAnswers": Popular[],
+  "allChoices": Popular[],
   "correctRate": number,
   "closeRate": number,
   "allAnswers": Popular[]

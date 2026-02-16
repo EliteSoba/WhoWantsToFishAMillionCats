@@ -2,6 +2,7 @@ import React, { ReactNode, useState } from 'react';
 
 import StartScreen from './StartScreen';
 import Game from './Game';
+import { resetLocation } from '../util/Util';
 
 type StateTypes = {
   [key: string]: number,
@@ -25,7 +26,7 @@ const App: React.FC = () => {
 
   const restartCallback = () => {
     try {
-      window.history.replaceState({}, '', document.location.href.replace(document.location.search, ''));
+      resetLocation();
     } finally {
       startCallback();
     }

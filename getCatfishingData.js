@@ -3,8 +3,8 @@
 const fs = require('node:fs');
 
 const MIN_DAY = 32;
-const FIRST_DAY = new Date('2024-06-24');
-let MAX_DAY = Math.floor((new Date() - FIRST_DAY) / (24 * 3_600_000));
+const ZEROTH_DAY = new Date('2024-06-24');
+let MAX_DAY = Math.ceil((new Date() - ZEROTH_DAY) / (24 * 3_600_000));
 
 // TODO
 // MAX_DAY = 307;
@@ -39,7 +39,8 @@ fs.promises.readdir('./src/data').then(files => {
 
     // idk why this only works one time but unfortunately it's no longer a problem since
     // i've already fetched everything. gotta remember to clean it up for next time.
-    // await new Promise(r => setTimeout(r, 2000));
+    const x = await new Promise(r => setTimeout(r, 2000));
+    console.log(x);
     try {
       fs.writeFileSync(`./src/data/${key}.json`, JSON.stringify(data));
     } catch (e) {

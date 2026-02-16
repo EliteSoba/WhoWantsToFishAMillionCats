@@ -45,6 +45,43 @@
   --color-emerald-darkest: oklch(0.22 0.04 169.37);
   --color-emerald-925: oklch(0.32 0.06 170.95);
   --color-emerald-935: oklch(0.29 0.05 171.78);
+
+  --animate-rainbow: rainbow 3s ease-in-out infinite;
+  @keyframes rainbow {
+    0% {
+      color: var(--color-red-600);
+    }
+    10% {
+      color: var(--color-orange-600);
+    }
+    20% {
+      color: var(--color-yellow-600);
+    }
+    30% {
+      color: var(--color-green-600);
+    }
+    40% {
+      color: var(--color-teal-600);
+    }
+    50% {
+      color: var(--color-sky-600);
+    }
+    60% {
+      color: var(--color-blue-600);
+    }
+    70% {
+      color: var(--color-violet-600);
+    }
+    80% {
+      color: var(--color-fuchsia-600);
+    }
+    90% {
+      color: var(--color-pink-600);
+    }
+    100% {
+      color: var(--color-red-600);
+    }
+  }
 }
 
 @layer components {

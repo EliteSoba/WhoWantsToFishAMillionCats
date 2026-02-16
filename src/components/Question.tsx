@@ -23,14 +23,8 @@ const Question: React.FC<Props> = ({
   articleCount,
   curArticle,
 }) => {
-  const [wasCorrect, setWasCorrect] = useState<boolean>(false);
   const [guess, setGuess] = useState<Popular>(['', 0, 0, 0]);
   const [showAnswer, setShowAnswer] = useState<boolean>(false);
-
-  const correctIndex = Math.floor(Math.random() * 4);
-  const guessesToShow = questionData.wrongAnswers.slice(0, correctIndex)
-    .concat([questionData.correctAnswer])
-    .concat(questionData.wrongAnswers.slice(correctIndex));
 
   const handleGuess = (guess: Popular) => {
     setGuess(guess);
@@ -71,7 +65,7 @@ const Question: React.FC<Props> = ({
   const renderGuesses = () => {
     return (
       <div className='grid grid-cols-1 md:grid-cols-2 gap-6 border-t border-emerald-700 p-6 font-sans text-sm/none font-bold text-emerald-600'>
-        {guessesToShow.map(renderGuess)}
+        {questionData.allChoices.map(renderGuess)}
       </div>
     );
   };

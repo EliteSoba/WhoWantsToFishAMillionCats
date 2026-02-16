@@ -28,6 +28,8 @@ const AnswerScreen: React.FC<Props> = ({ guess, questionData }) => {
     if (!questionData.imageData) {
       return null;
     }
+
+    // Scale image to be no taller than 256 px (width gets defaulted to 300 from the API call)
     let width = questionData.imageData.width;
     let height = questionData.imageData.height;
     if (height > 256) {
