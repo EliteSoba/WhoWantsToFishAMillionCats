@@ -32,5 +32,4 @@ Uses a hacked together combination of webpack, React, Typescript, and Tailwind
 - ~~Figure out how my tailwind setup is working~~
 - I really want to use react router here with urls and whatnot
   - Okay this really sucks without a server because my only real option is a hacky 404 behavior
-  - I probably should still do a StaticRouter
 - I also kinda wanna practice react native
