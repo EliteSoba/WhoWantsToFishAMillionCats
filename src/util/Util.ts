@@ -19,8 +19,3 @@ export function shuffleArray<Type>(array: Type[]) {
 export function randomInt(range: number) {
   return Math.floor(Math.random() * range);
 }
-
-export function resetLocation() {
-  // TODO: if i do react router or something this'll need to change but will probably be easier
-  window.history.replaceState({}, '', document.location.href.replace(document.location.search, ''));
-}

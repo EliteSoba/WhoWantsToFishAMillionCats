@@ -4,15 +4,12 @@ import { GameDay, Popular, QuestionData, QuestionDataWithAnswer, WikiData } from
 import Question from './Question';
 import EndScreen from './EndScreen';
 import { randomInt, shuffleArray } from '../util/Util';
+import { Link, useParams } from "react-router";
 
 const wikiTemplate = 'https://en.wikipedia.org/w/api.php?action=query&origin=*&format=json&formatversion=2&redirects=1&prop=extracts%7Cpageimages&exchars=500&exintro=1&explaintext=1&piprop=name%7Cthumbnail&pithumbsize=300&pilicense=free&exlimit=10&pilimit=10&titles=';
 const wikiImageTemplate = 'https://en.wikipedia.org/w/api.php?action=query&origin=*&format=json&formatversion=2&prop=imageinfo&iiprop=extmetadata%7Curl&iiextmetadatafilter=Artist%7CLicenseShortName%7CLicenseUrl&titles=';
 
-interface Props {
-  replay: () => void
-};
-
-const Game: React.FC<Props> = ({ replay }) => {
+const Game: React.FC = () => {
   const [gameData, setGameData] = useState<QuestionDataWithAnswer[] | null>(null);
   const [index, setIndex] = useState<number>(0);
   const [score, setScore] = useState<number>(0);
@@ -20,6 +17,8 @@ const Game: React.FC<Props> = ({ replay }) => {
 
   // no clue why this needs a default value
   const [chosenDay, setChosenDay] = useState<string>('0');
+
+  const { day } = useParams();
 
   useEffect(() => {
     (async () => {
@@ -29,9 +28,8 @@ const Game: React.FC<Props> = ({ replay }) => {
       let MAX_DAY = Math.floor((new Date() as any - ZEROTH_DAY) / (24 * 3_600_000));
 
       let chosenDay = `${randomInt(MAX_DAY - MIN_DAY) + MIN_DAY}`;
-      const paramDay = new URLSearchParams(window.location.search).get('day');
-      if (paramDay) {
-        chosenDay = paramDay;
+      if (day) {
+        chosenDay = day;
       }
       setChosenDay(chosenDay);
 
@@ -118,17 +116,16 @@ const Game: React.FC<Props> = ({ replay }) => {
   }
 
   if (index >= gameData.length) {
-    // TODO: game ended screen
+    // TODO: game ended screen.
     return (
       <>
         <EndScreen score={score} day={chosenDay} guesses={guesses} allQuestionData={gameData} />
         <div className='default-padding'>
-          <button
-            onClick={() => replay()}
-            className='bg-emerald-900 enabled:hover:bg-emerald-700 p-4 rounded-md border-emerald-700 border font-sans text-sm/none font-bold text-emerald-600 w-fit'
-          >
-            Play Again?
-          </button>
+          <Link to='/game/random' state={{ lastPlayedDate: new Date() }}>
+            <button className='bg-emerald-900 enabled:hover:bg-emerald-700 p-4 rounded-md border-emerald-700 border font-sans text-sm/none font-bold text-emerald-600 w-fit'>
+              Play Again?
+            </button>
+          </Link>
         </div>
       </>
     );

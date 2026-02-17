@@ -7,7 +7,7 @@ common user answers, it just skips that question for now.
 
 Uses data from days 32 to 594.
 
-Uses a hacked together combination of webpack, React, Typescript, and Tailwind
+Uses a hacked together combination of webpack, React + Router, Typescript, and Tailwind
 
 #### TODO:
 - Add attributions
@@ -30,6 +30,5 @@ Uses a hacked together combination of webpack, React, Typescript, and Tailwind
 - ~~I should do something about all the SVGs~~good enough
 - Keyboard controls, or remove the tooltips
 - ~~Figure out how my tailwind setup is working~~
-- I really want to use react router here with urls and whatnot
-  - Okay this really sucks without a server because my only real option is a hacky 404 behavior
+- ~~I really want to use react router here with urls and whatnot~~
 - I also kinda wanna practice react native
