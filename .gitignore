@@ -1,3 +1,5 @@
 node_modules/
 dist/
 dist/*
+src/data/*
+!src/data/32.json
