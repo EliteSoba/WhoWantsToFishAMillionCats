@@ -11,10 +11,10 @@ const App: React.FC = () => {
   const location = useLocation();
 
   return (
-    <section className='h-screen flex flex-col'>
+    <section className='h-screen flex flex-col pb-4'>
       <header className="relative">
         <Link to='/'>
-          <div className="pl-4 sm:pl-8 -translate-y-0.5 leading-none text-amber-400 underlined-text">
+          <div className="pt-4 pl-4 sm:pl-8 -translate-y-0.5 leading-none text-amber-400 underlined-text">
             <span className="xs:text-4xl text-3xl font-normal tracking-normal md:text-5xl">{'Who wants to '}</span>
             <span className="xs:text-4xl text-3xl font-normal tracking-normal italic md:text-5xl">{'fish'}</span>
             <span className="xs:text-4xl font-serif text-3xl font-normal tracking-normal md:text-5xl">{' a million '}</span>
