@@ -112,18 +112,17 @@ const Game: React.FC = () => {
         }
         let attribution;
         if (wikiData.pageimage) {
-          const attributionFilename = parsedImages.query.normalized.find(({ from }) => from === `File:${wikiData.pageimage}`);
-          if (attributionFilename) {
-            const attributionData = parsedImages.query.pages.find(({ title }) => title === attributionFilename.to);
-            if (attributionData) {
-              const imageinfo = attributionData.imageinfo[0];
-              attribution = {
-                artist: imageinfo.extmetadata.Artist?.value,
-                licenseUrl: imageinfo.extmetadata.LicenseUrl?.value,
-                licenseName: imageinfo.extmetadata.LicenseShortName.value,
-                wikimediaSource: imageinfo.descriptionurl,
-              };
-            }
+          // slightly cursed because not everything gets normalized
+          const attributionFilename = parsedImages.query.normalized.find(({ from }) => from === `File:${wikiData.pageimage}`)?.to || `File:${wikiData.pageimage}`;
+          const attributionData = parsedImages.query.pages.find(({ title }) => title === attributionFilename);
+          if (attributionData) {
+            const imageinfo = attributionData.imageinfo[0];
+            attribution = {
+              artist: imageinfo.extmetadata.Artist?.value,
+              licenseUrl: imageinfo.extmetadata.LicenseUrl?.value,
+              licenseName: imageinfo.extmetadata.LicenseShortName.value,
+              wikimediaSource: imageinfo.descriptionurl,
+            };
           }
         }
         return {

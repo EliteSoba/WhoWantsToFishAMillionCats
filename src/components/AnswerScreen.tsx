@@ -14,6 +14,22 @@ const correctClasses = 'bk-emerald-400/80 text-[#002218]';
 
 const interleave = (arr: any[], x: any) => arr.flatMap(e => [e, x]).slice(0, -1);
 
+// Source - https://stackoverflow.com/a/7394787
+// Posted by Rob W, modified by community. See post 'Timeline' for change history
+// Retrieved 2026-02-17, License - CC BY-SA 3.0
+const decodeHtml = (html: string) => {
+  var txt = document.createElement("textarea");
+  txt.innerHTML = html;
+  return txt.value;
+};
+
+// Source - https://stackoverflow.com/a/6744068
+// Posted by jcomeau_ictx, modified by community. See post 'Timeline' for change history
+// Retrieved 2026-02-17, License - CC BY-SA 4.0
+const detag = (html: string) => {
+  return html.replace(/<[^>]*>/g, '');
+};
+
 const AnswerScreen: React.FC<Props> = ({ guess, questionData }) => {
   const renderHeader = () => {
     return (
@@ -72,13 +88,9 @@ const AnswerScreen: React.FC<Props> = ({ guess, questionData }) => {
       wikimediaSource
     } = questionData.attribution;
 
-    // Sometimes we get artists as <a> tags, but we just want the actual text
-    // The options are to create a simple div and inject the HTML in, then read the innerText
-    // or, the safer option, to just do this magic regex to strip all tags and hope for the best
-    // Source - https://stackoverflow.com/a/6744068
-    // Posted by jcomeau_ictx, modified by community. See post 'Timeline' for change history
-    // Retrieved 2026-02-17, License - CC BY-SA 4.0
-    const artistElement = artist && <span key='artist'>{artist?.replace(/<[^>]*>/g, '')}</span>;
+    // Sometimes we get artists as html tags, but we just want the actual text
+    const artistElement = artist && <span key='artist'>{decodeHtml(detag(artist))}</span>;
+
     const licenseInfoElement = licenseUrl
       ? <a href={licenseUrl} target="_blank" key='license'>{licenseName}</a>
       : <span key='license'>{licenseName}</span>;
