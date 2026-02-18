@@ -87,7 +87,7 @@ const GuessSummary: React.FC<Props> = ({ guess, questionData }) => {
           {guess[1] === 1 ? getRightSvg('min-h-[1.75rem] min-w-[1.75rem]') : getWrongSvg('min-h-[1.75rem] min-w-[1.75rem]')}
           <div className="mx-1.5 text-3xl/none sm:text-3xl/tight correct clickable end-title">{questionData.title}</div>
           <div className="mr-1">
-            <a href="https://en.wikipedia.org/wiki/Dril" target="_blank" title="Open Wikipedia article in new tab" className="bg-emerald-darkest hover:text-emerald-darkest block h-6 w-6 rounded-full p-0.5 text-amber-400 no-underline hover:bg-amber-400">
+            <a href={`https://en.wikipedia.org/wiki/${questionData.title}`} target="_blank" title="Open Wikipedia article in new tab" className="bg-emerald-darkest hover:text-emerald-darkest block h-6 w-6 rounded-full p-0.5 text-amber-400 no-underline hover:bg-amber-400">
               {getWikiSvg('h-full w-full')}
             </a>
           </div>
