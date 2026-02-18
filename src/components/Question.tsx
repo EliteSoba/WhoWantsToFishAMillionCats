@@ -90,8 +90,6 @@ const Question: React.FC<Props> = ({
     );
   };
 
-  const date = dayToDate(day);
-
   return (
     <>
       {showAnswer ? renderAnswerScreen() : renderGuessScreen()}
@@ -103,7 +101,7 @@ const Question: React.FC<Props> = ({
             {` · ${articleCount}`}
           </div>
           <div className="bg-[#043d2f] flex h-6 items-center px-3 text-emerald-300 sm:h-7">
-            {`${day} · ${date}`}
+            {`${day} · ${dayToDate(day) }`}
           </div>
           <div className="text-right">Score · <data className="text-emerald-200">{score + guess[1]}</data></div>
         </section>

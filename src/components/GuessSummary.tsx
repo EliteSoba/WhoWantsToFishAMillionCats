@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { getCategoriesSvg, getGuessPencilSvg, getPeopleSvg, getRightSvg, getWikiSvg, getWrongSvg } from '../util/svgs';
+import { getCategoriesSvg, getGuessPencilSvg, getPeopleSvg, getRightSvg, getSuggestionSvg, getWikiSvg, getWrongSvg } from '../util/svgs';
 import { Popular, QuestionDataWithAnswer } from '../types/types';
 import StyledLink from './StyledLink';
 
@@ -44,24 +44,40 @@ const GuessSummary: React.FC<Props> = ({ guess, questionData }) => {
     );
   };
 
+  const renderSuggested = () => {
+    if (!questionData.suggestedBy) {
+      return null;
+    }
+    return (
+      <>
+        <div className="mt-1 flex items-center gap-x-1 py-1 text-sm/none sm:text-base/none">
+          {getSuggestionSvg('mr-0.5 inline text-emerald-600')}
+          <div className="font-sans text-xs/none text-emerald-600 sm:text-sm/none">{'Suggested by '}</div>
+          <div className="whitespace-nowrap text-amber-200">{questionData.suggestedBy}</div>
+        </div>
+      </>
+    );
+  };
+
   const renderCats = () => {
     if (!expanded) {
       return null;
     }
     return (
       <div className='text-sm/relaxed sm:text-base/relaxed'>
-        <div className=''>
+        <div className='text-amber-dim-UNUSED'>
           {getCategoriesSvg('inline mr-0.5 text-[#7f7623]')}
           <span className="categories">
             {questionData.categories.map(cat => <span key={cat}><StyledLink href={`https://en.wikipedia.org/wiki/Category:${cat.replaceAll(' ', '_')}`} className='not-hover:decoration-[#7f7623]'>{cat}</StyledLink></span>)}
           </span>
         </div>
+        {renderSuggested()}
       </div>
     )
   };
 
   return (
-    <div className={`group relative bg-emerald-950 pt-1 pb-1.5 select-none cursor-pointer ${guess[1] === 1 ? 'correct' : 'incorrect'} ${expanded ? 'expanded' : ''}`} title={expanded ? undefined: "Tap to expand"} onClick={() => setExpanded(prev => !prev)}>
+    <div className={`group relative bg-emerald-950 pt-1 pb-1.5 select-none cursor-pointer ${guess[1] === 1 ? 'correct' : 'incorrect'} ${expanded ? 'expanded' : ''}`} title={expanded ? undefined : "Tap to expand"} onClick={() => setExpanded(prev => !prev)}>
       <div className="bg-emerald-935 absolute top-0 right-0 bottom-0 z-0" style={{ width: `${(correctRate + closeRate) / 2}%` }}>
         <div className="bg-emerald-925 absolute top-0 right-0 bottom-0 z-0" style={{ width: `${correctRate * 100 / (correctRate + closeRate)}%` }}>
         </div>

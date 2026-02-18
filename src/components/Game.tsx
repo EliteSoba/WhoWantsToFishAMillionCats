@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from 'react';
 
-import { GameDay, Popular, QuestionData, QuestionDataWithAnswer, WikiData } from '../types/types';
+import { Attribution, GameDay, Popular, QuestionData, QuestionDataWithAnswer, WikiData, WikiImageData } from '../types/types';
 import Question from './Question';
 import EndScreen from './EndScreen';
 import { randomInt, shuffleArray } from '../util/Util';
 import { Link, useParams } from "react-router";
 
+// TODO: imagine if i wasnt a moron and actually made this organized
 const wikiTemplate = 'https://en.wikipedia.org/w/api.php?action=query&origin=*&format=json&formatversion=2&redirects=1&prop=extracts%7Cpageimages&exchars=500&exintro=1&explaintext=1&piprop=name%7Cthumbnail&pithumbsize=300&pilicense=free&exlimit=10&pilimit=10&titles=';
 const wikiImageTemplate = 'https://en.wikipedia.org/w/api.php?action=query&origin=*&format=json&formatversion=2&prop=imageinfo&iiprop=extmetadata%7Curl&iiextmetadatafilter=Artist%7CLicenseShortName%7CLicenseUrl&titles=';
 
@@ -65,6 +66,7 @@ const Game: React.FC = () => {
         if (allChoices.length === 4) {
           return {
             title: article.title,
+            suggestedBy: article.suggestedBy,
             categories: article.categories,
             allChoices: allChoices,
             correctRate: dayData.stats.articles[i].correctRate,
@@ -85,21 +87,50 @@ const Game: React.FC = () => {
       const wikiData = await fetch(`${wikiTemplate}${wikiQuery}`);
       const parsedData = await wikiData.json() as WikiData;
       // Note: this is necessary for attributions
-      // const wikiImageQuery = parsedData.pages.map(({ pageImage }) => pageImage)
-      //   .filter(image => !!image)
-      //   .join('|');
-      // const wikiImageData = await fetch(`${wikiImageQuery}${wikiImageQuery}`);
-      // const parsedImages =
+      // uhhhhh so i think the algorithm is pages[x].pageimage gets urlencoded and prepended with File:
+      // and joined with | then queried, which returns query.pages[x].imageinfo[0] as attribution
+      // gotta map the original pageimage to title *through the normalization data*
+      // from this i need three things
+      //  1. artist: attribution.extmetadata.Artist.value - this can also be an <a> which i need to strip
+      //  2. license: <a href={attribution.extmetadata.LicenseUrl.value}>{attribution.extmetadata.LicenseShortName.value}</a> - license url seems optional
+      //  3. wikimedia commons: no clue if the text changes but it's hrefed to attribution.descriptionurl
+      // i guess the (optional) container will need artist, licenseurl, licensename, wikimediasource
+      // god i hate this
+      const imagineIfIActuallyBuiltAQueryLikeASanePerson =
+        parsedData.query.pages.map(({ pageimage }) => pageimage)
+          .filter(image => image !== undefined) // typescript pls why cant i just do !! here
+          .map(title => encodeURI(title).replaceAll('&', '%26'))
+          .map(title => `File:${title}`)
+          .join('|');
+      const wikiImageData = await fetch(`${wikiImageTemplate}${imagineIfIActuallyBuiltAQueryLikeASanePerson}`);
+      const parsedImages = await wikiImageData.json() as WikiImageData;
 
       const gameDataWithAnswer = gameData.map(questionData => {
         const wikiData = parsedData.query.pages.find(({ title }) => title === questionData.title);
         if (!wikiData) {
           return null;
         }
+        let attribution;
+        if (wikiData.pageimage) {
+          const attributionFilename = parsedImages.query.normalized.find(({ from }) => from === `File:${wikiData.pageimage}`);
+          if (attributionFilename) {
+            const attributionData = parsedImages.query.pages.find(({ title }) => title === attributionFilename.to);
+            if (attributionData) {
+              const imageinfo = attributionData.imageinfo[0];
+              attribution = {
+                artist: imageinfo.extmetadata.Artist?.value,
+                licenseUrl: imageinfo.extmetadata.LicenseUrl?.value,
+                licenseName: imageinfo.extmetadata.LicenseShortName.value,
+                wikimediaSource: imageinfo.descriptionurl,
+              };
+            }
+          }
+        }
         return {
           ...questionData,
           summary: wikiData.extract,
           imageData: wikiData.thumbnail,
+          attribution: attribution,
         };
       }).filter(data => !!data);
 

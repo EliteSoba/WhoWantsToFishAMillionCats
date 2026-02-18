@@ -1,9 +1,9 @@
 import React from 'react';
 import { Popular, QuestionDataWithAnswer } from '../types/types';
-import WikiLink from './WikiLink';
 import StyledLink from './StyledLink';
+import WikiLink from './WikiLink';
 
-import { getCategoriesSvg, getGuessPencilSvg, getRightSvg, getWrongSvg } from '../util/svgs';
+import { getCameraSvg, getCategoriesSvg, getGuessPencilSvg, getRightSvg, getWrongSvg } from '../util/svgs';
 
 interface Props {
   guess: Popular,
@@ -61,6 +61,42 @@ const AnswerScreen: React.FC<Props> = ({ guess, questionData }) => {
     )
   }
 
+  const renderAttribution = () => {
+    if (!questionData.attribution) {
+      return null;
+    }
+    const {
+      artist,
+      licenseUrl,
+      licenseName,
+      wikimediaSource
+    } = questionData.attribution;
+
+    // Sometimes we get artists as <a> tags, but we just want the actual text
+    // The options are to create a simple div and inject the HTML in, then read the innerText
+    // or, the safer option, to just do this magic regex to strip all tags and hope for the best
+    // Source - https://stackoverflow.com/a/6744068
+    // Posted by jcomeau_ictx, modified by community. See post 'Timeline' for change history
+    // Retrieved 2026-02-17, License - CC BY-SA 4.0
+    const artistElement = artist && <span key='artist'>{artist?.replace(/<[^>]*>/g, '')}</span>;
+    const licenseInfoElement = licenseUrl
+      ? <a href={licenseUrl} target="_blank" key='license'>{licenseName}</a>
+      : <span key='license'>{licenseName}</span>;
+    const wikimediaSourceElement = <a href={wikimediaSource} target="_blank" key='wikimedia'>Wikimedia Commons</a>;
+
+    const attributionData = interleave([artistElement, licenseInfoElement, wikimediaSourceElement].filter(element => !!element), ' · ');
+    return (
+      <>
+        <div className="h-full">
+          {getCameraSvg()}
+        </div>
+        <div className="dim-links font-sans text-xs text-emerald-600 sm:text-sm">
+          {attributionData}
+        </div>
+      </>
+    );
+  };
+
   const renderSummary = () => {
     const categories = questionData.categories.map(cat => {
       return (
@@ -72,6 +108,8 @@ const AnswerScreen: React.FC<Props> = ({ guess, questionData }) => {
         </StyledLink>
       );
     });
+
+    questionData.attribution?.licenseName
 
     const splitCategories = interleave(categories, ' · ');
     return (
@@ -93,6 +131,7 @@ const AnswerScreen: React.FC<Props> = ({ guess, questionData }) => {
           <div className="text-base/relaxed">
             {splitCategories}
           </div>
+          {renderAttribution()}
         </section>
       </>
     );
