@@ -16,6 +16,7 @@ Uses a hacked together combination of webpack, React + Router, Typescript, and T
   - Solved somewhat by also including very similar correct answers
   - Can still probably increase the string distance a bit, and also maybe better weighting
   - Fake bad answers? I can probably do some vowel replacement for wrong answers
+  - Sometimes there's only one answer (see Day 280)
 - ~~More variety in correct answers~~
 - ~~Link to article when there's no image~~
 - Remember the other thing I wanted to do related to answers

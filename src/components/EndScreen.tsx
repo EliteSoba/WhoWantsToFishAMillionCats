@@ -37,9 +37,9 @@ const EndScreen: React.FC<Props> = ({ score, day, guesses, allQuestionData }) =>
 
   const renderContents = () => {
     return (
-      <section className="default-padding pt-4">
+      <section className="default-padding pt-4 overflow-auto">
         <div className="min-w-0 sm:row-span-3 sm:row-start-1">
-          <div className="pb-8">
+          <div className="pb-4">
             <div className="flex items-end justify-between pb-2">
               <h3 className="mb-0!">Questions</h3>
               {renderCorrectness()}

@@ -92,9 +92,9 @@ const AnswerScreen: React.FC<Props> = ({ guess, questionData }) => {
     const artistElement = artist && <span key='artist'>{decodeHtml(detag(artist))}</span>;
 
     const licenseInfoElement = licenseUrl
-      ? <a href={licenseUrl} target="_blank" key='license'>{licenseName}</a>
+      ? <StyledLink href={licenseUrl} target="_blank" key='license' className='text-emerald-600! decoration-[#336857]'>{licenseName}</StyledLink>
       : <span key='license'>{licenseName}</span>;
-    const wikimediaSourceElement = <a href={wikimediaSource} target="_blank" key='wikimedia'>Wikimedia Commons</a>;
+    const wikimediaSourceElement = <StyledLink href={wikimediaSource} target="_blank" key='wikimedia' className='text-emerald-600! decoration-[#336857]'>Wikimedia Commons</StyledLink>;
 
     const attributionData = interleave([artistElement, licenseInfoElement, wikimediaSourceElement].filter(element => !!element), ' · ');
     return (

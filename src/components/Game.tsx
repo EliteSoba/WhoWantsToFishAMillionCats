@@ -150,9 +150,9 @@ const Game: React.FC = () => {
     return (
       <>
         <EndScreen score={score} day={chosenDay} guesses={guesses} allQuestionData={gameData} />
-        <div className='default-padding'>
+        <div className='default-padding border-t border-emerald-900 sm:border-transparent'>
           <Link to='/game/random' state={{ lastPlayedDate: new Date() }}>
-            <button className='bg-emerald-900 enabled:hover:bg-emerald-700 p-4 rounded-md border-emerald-700 border font-sans text-sm/none font-bold text-emerald-600 w-fit'>
+            <button className='bg-emerald-900 enabled:hover:bg-emerald-700 p-4 mt-4 mb-4 rounded-md border-emerald-700 border font-sans text-sm/none font-bold text-emerald-600 w-full sm:w-fit'>
               Play Again?
             </button>
           </Link>
