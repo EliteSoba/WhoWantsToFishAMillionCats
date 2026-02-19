@@ -11,8 +11,8 @@ const App: React.FC = () => {
   const location = useLocation();
 
   return (
-    <section className='min-h-screen'>
-      <div className='max-h-screen flex flex-col'>
+    <section className='min-h-dvh'>
+      <div className='max-h-dvh flex flex-col'>
         <header className="relative">
           <Link to='/'>
             <div className="pt-4 pl-4 sm:pl-8 -translate-y-0.5 leading-none text-amber-400 underlined-text">
