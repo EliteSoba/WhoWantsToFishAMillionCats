@@ -79,3 +79,12 @@ export interface QuestionDataWithAnswer extends QuestionData {
   "imageData"?: Thumbnail,
   "attribution"?: Attribution
 };
+
+export interface monthInfo {
+  "first": Date,
+  "shortName": string,
+  "link": string,
+};
+export interface yearMonths {
+  [index: string]: monthInfo[]
+};

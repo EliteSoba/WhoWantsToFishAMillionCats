@@ -51,4 +51,7 @@ fs.promises.readdir('./src/data').then(files => {
       console.log(`Fetched ${index} of ${allKeys.length}`);
     }
   });
+
+  // Update what the latest day is
+  fs.writeFileSync('./src/data/latest.json', `{"latest": ${allKeys[allKeys.length - 1]}}`);
 });

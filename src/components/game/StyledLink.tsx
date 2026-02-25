@@ -5,7 +5,7 @@ interface Props extends AnchorHTMLAttributes<HTMLAnchorElement> {
 }
 
 const StyledLink: React.FC<Props> = ({ href, children, className, ...props }) => {
-  const cn = `underline decoration-1 underline-offset-4 not-italic text-amber-400 ${className || ''}`;
+  const cn = `is-link ${className || ''}`;
   return (
     <a
       href={href}

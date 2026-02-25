@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import { getCategoriesSvg, getGuessPencilSvg, getPeopleSvg, getRightSvg, getSuggestionSvg, getWikiSvg, getWrongSvg } from '../util/svgs';
-import { Popular, QuestionDataWithAnswer } from '../types/types';
+import { getCategoriesSvg, getGuessPencilSvg, getPeopleSvg, getRightSvg, getSuggestionSvg, getWikiSvg, getWrongSvg } from '../../util/svgs';
+import { Popular, QuestionDataWithAnswer } from '../../types/types';
 import StyledLink from './StyledLink';
 
 interface Props {

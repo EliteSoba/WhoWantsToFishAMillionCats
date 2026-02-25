@@ -3,3 +3,4 @@ dist/
 dist/*
 src/data/*
 !src/data/32.json
+!src/data/latest.json

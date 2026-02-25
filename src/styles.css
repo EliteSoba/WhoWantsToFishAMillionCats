@@ -133,6 +133,22 @@
     background-image: url(./assets/catfish.png);
   }
 
+  .is-link {
+    @apply text-amber-400;
+    @apply underline;
+    @apply decoration-1;
+    @apply underline-offset-4;
+    @apply not-italic;
+  }
+
+  hr {
+    @apply my-4;
+    @apply border-t-2;
+    @apply border-dotted;
+    @apply border-[#065f46];
+    @apply bg-transparent;
+  }
+
   button, [role="button"] {
     cursor: pointer;
   }

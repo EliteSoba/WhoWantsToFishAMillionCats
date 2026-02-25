@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 
-import { Popular, QuestionDataWithAnswer } from '../types/types';
+import { Popular, QuestionDataWithAnswer } from '../../types/types';
 import AnswerScreen from './AnswerScreen';
-import { dayToDate } from '../util/DayUtils';
+import { dayToDate } from '../../util/DayUtils';
 
 interface Props {
   questionData: QuestionDataWithAnswer,

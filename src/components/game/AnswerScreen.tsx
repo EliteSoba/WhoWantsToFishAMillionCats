@@ -1,16 +1,14 @@
 import React from 'react';
-import { Popular, QuestionDataWithAnswer } from '../types/types';
+import { Popular, QuestionDataWithAnswer } from '../../types/types';
 import StyledLink from './StyledLink';
 import WikiLink from './WikiLink';
 
-import { getCameraSvg, getCategoriesSvg, getGuessPencilSvg, getRightSvg, getWrongSvg } from '../util/svgs';
+import { getCameraSvg, getCategoriesSvg, getGuessPencilSvg, getRightSvg, getWrongSvg } from '../../util/svgs';
 
 interface Props {
   guess: Popular,
   questionData: QuestionDataWithAnswer
 }
-
-const correctClasses = 'bk-emerald-400/80 text-[#002218]';
 
 const interleave = (arr: any[], x: any) => arr.flatMap(e => [e, x]).slice(0, -1);
 

@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react';
 
-import { Attribution, GameDay, Popular, QuestionData, QuestionDataWithAnswer, WikiData, WikiImageData } from '../types/types';
+import { Attribution, GameDay, Popular, QuestionData, QuestionDataWithAnswer, WikiData, WikiImageData } from '../../types/types';
 import Question from './Question';
 import EndScreen from './EndScreen';
-import { randomInt, shuffleArray } from '../util/Util';
+import { randomInt, shuffleArray } from '../../util/Util';
 import { Link, useParams } from "react-router";
 
 // TODO: imagine if i wasnt a moron and actually made this organized

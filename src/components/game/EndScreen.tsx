@@ -1,7 +1,7 @@
 import React from 'react';
-import { dayToDate } from '../util/DayUtils';
+import { dayToDate } from '../../util/DayUtils';
 import GuessSummary from './GuessSummary';
-import { Popular, QuestionDataWithAnswer } from '../types/types';
+import { Popular, QuestionDataWithAnswer } from '../../types/types';
 
 interface Props {
   score: number,

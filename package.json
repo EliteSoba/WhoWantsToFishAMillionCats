@@ -5,7 +5,7 @@
   "private": true,
   "scripts": {
     "fetchData": "node ./getCatfishingData.js",
-    "build": "webpack",
+    "build": "webpack --watch",
     "build-prod": "node ./getCatfishingData.js && webpack --mode production",
     "predeploy": "npm run build-prod",
     "deploy": "gh-pages -d dist"

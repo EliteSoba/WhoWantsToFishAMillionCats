@@ -1,6 +1,6 @@
 import React from 'react';
 import StyledLink from './StyledLink';
-import { getWikiSvg } from '../util/svgs';
+import { getWikiSvg } from '../../util/svgs';
 
 interface Props {
   url: string,
